@@ -5,22 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Multiple Tabs</title>
     <script>
-        function getAllParametersByName(name, url = window.location.href) {
+        function getAllParametersByName(names, url = window.location.href) {
             const params = new URLSearchParams(url.split('?')[1]);
-            const values = [];
-            for (const [key, value] of params.entries()) {
-                if (key === name) {
-                    values.push(decodeURIComponent(value));
+            const values = {};
+            names.forEach(name => {
+                values[name] = [];
+                for (const [key, value] of params.entries()) {
+                    if (key === name) {
+                        values[name].push(decodeURIComponent(value));
+                    }
                 }
-            }
+            });
             return values;
         }
 
         function openMultipleTabs() {
-            const urls = getAllParametersByName('url');
-            urls.forEach(url => {
+            const paramNames = ['url', 'urlD', 'urlE'];
+            const urls = getAllParametersByName(paramNames);
+
+            urls.url.forEach(url => {
                 if (url) {
-                    window.open(url, '_blank');
+                    const eventNumber = url.split('/').pop();
+                    window.open(url, `Event ${eventNumber}`);
+                }
+            });
+
+            urls.urlD.forEach(url => {
+                if (url) {
+                    const eventNumber = url.split('/').pop();
+                    window.open(url, `DRAFT Event ${eventNumber}`);
+                }
+            });
+
+            urls.urlE.forEach(url => {
+                if (url) {
+                    const eventNumber = url.split('/').pop();
+                    window.open(url, `EMPTY Event ${eventNumber}`);
                 }
             });
         }
