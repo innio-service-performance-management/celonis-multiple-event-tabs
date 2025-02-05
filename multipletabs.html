@@ -26,21 +26,30 @@
             urls.url.forEach(url => {
                 if (url) {
                     const eventNumber = url.split('/').pop();
-                    window.open(url, `Event ${eventNumber}`);
+                    const newWindow = window.open(url, '_blank');
+                    if (newWindow) {
+                        newWindow.document.title = `Event ${eventNumber}`;
+                    }
                 }
             });
 
             urls.urlD.forEach(url => {
                 if (url) {
                     const eventNumber = url.split('/').pop();
-                    window.open(url, `DRAFT Event ${eventNumber}`);
+                    const newWindow = window.open(url, '_blank');
+                    if (newWindow) {
+                        newWindow.document.title = `DRAFT Event ${eventNumber}`;
+                    }
                 }
             });
 
             urls.urlE.forEach(url => {
                 if (url) {
                     const eventNumber = url.split('/').pop();
-                    window.open(url, `EMPTY Event ${eventNumber}`);
+                    const newWindow = window.open(url, '_blank');
+                    if (newWindow) {
+                        newWindow.document.title = `EMPTY Event ${eventNumber}`;
+                    }
                 }
             });
         }
@@ -52,3 +61,4 @@
     <h1>Opening Multiple Tabs...</h1>
 </body>
 </html>
+
